@@ -6,7 +6,7 @@ const COLORS = ["#FFD700", "#FFB6C1", "#87CEFA", "#90EE90", "#FFA07A", "#DDA0DD"
 const EMOJIS = ["🤣", "😂", "😎", "🥳", "🤪", "🤩"];
 
 export default function Saved() {
-  const { savedJokes, removeJoke } = useJokes();
+  const { savedJokes, deleteJoke } = useJokes();
 
   const shareJoke = async (joke: string) => {
     try {
@@ -28,7 +28,7 @@ export default function Saved() {
       <Link href="/">
         <Text style={styles.back}>⬅</Text>
       </Link>
-      <Text style={styles.title}>📚 Saved Jokes</Text>
+      <Text style={styles.title}>Saved Jokes</Text>
 
       {savedJokes.length === 0 ? (
         <Text style={styles.empty}>No jokes saved yet!</Text>
@@ -43,7 +43,7 @@ export default function Saved() {
                 <Text style={styles.emoji}>{emoji}</Text>
                 <Text style={styles.joke}>{item}</Text>
                 <View style={styles.buttonsRow}>
-                  <TouchableOpacity onPress={() => removeJoke(index)}>
+                  <TouchableOpacity onPress={() => deleteJoke(index)}>
                     <Text style={styles.delete}>❌</Text>
                   </TouchableOpacity>
                   <TouchableOpacity onPress={() => shareJoke(item)}>

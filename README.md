@@ -38,8 +38,8 @@ Incluye un diseño con **tarjetas coloridas** y **persistencia local con AsyncSt
 ```bash
 1. Instalar [Expo Go](https://expo.dev/client) en Android/iOS.
 2. Escanear este QR:
-   ![QR](./assets/screenshots/qr.png)
 ```
+|![QR](./assets/screenshots/qr.png)|
 ---
 ## 👩‍💻 Autor
 
