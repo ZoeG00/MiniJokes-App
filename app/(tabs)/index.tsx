@@ -1,75 +1,130 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import { useEffect, useState } from "react";
+import { View, Text, Button, StyleSheet, ActivityIndicator, Alert } from "react-native";
+import { Link } from "expo-router";
+import { useJokes } from "@/context/JokesContext";
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+export default function Index() {
+  const [joke, setJoke] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const { savedJokes, saveJoke } = useJokes();
 
-export default function HomeScreen() {
+  const getJoke = async () => {
+    try {
+      setLoading(true);
+      const res = await fetch("https://official-joke-api.appspot.com/random_joke");
+      const data = await res.json();
+      setJoke(`${data.setup} 🤣 ${data.punchline}`);
+    } catch (e) {
+      setJoke("Oops! Something went wrong.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getJoke();
+  }, []);
+
+  const isDuplicate = joke ? savedJokes.includes(joke) : false;
+
+  const handleSave = () => {
+    if (!joke) return;
+    if (isDuplicate) {
+      Alert.alert("⚠️ Oops", "Este chiste ya está guardado.");
+      return;
+    }
+    saveJoke(joke);
+    Alert.alert("✅ Guardado", "El chiste fue guardado en tu lista.");
+  };
+
+  const [setup, punchline] = (joke ?? "").split(" 🤣 ");
+
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <View style={styles.container}>
+      <Text style={styles.title}>🤣 Joke App</Text>
+
+      {loading ? (
+        <ActivityIndicator size="large" color="#4CAF50" />
+      ) : (
+        <View style={styles.card}>
+          <Text style={styles.setup}>{setup || "Press the button to get a joke!"}</Text>
+          {!!punchline && <Text style={styles.punchline}>{punchline}</Text>}
+        </View>
+      )}
+
+      <View style={styles.buttonRow}>
+        <View style={styles.buttonWrap}>
+          <Button title="Get another joke" onPress={getJoke} color="#4CAF50" disabled={loading} />
+        </View>
+        <View style={styles.buttonWrap}>
+          <Button
+            title={isDuplicate ? "Already saved" : "Save joke"}
+            onPress={handleSave}
+            color="#FF5722"
+            disabled={!joke || isDuplicate}
+          />
+        </View>
+      </View>
+
+      <Link href="/saved">
+        <Text style={styles.link}>Go to saved jokes</Text>
+      </Link>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  container: {
+    flex: 1,
+    backgroundColor: "#F5F5F5",
+    padding: 20,
+    alignItems: "center",
+    justifyContent: "center",
   },
-  stepContainer: {
-    gap: 8,
+  title: {
+    fontSize: 26,
+    fontWeight: "bold",
+    color: "#333",
+    marginBottom: 12,
+  },
+  card: {
+    backgroundColor: "#fff",
+    width: "100%",
+    padding: 20,
+    borderRadius: 12,
+    marginBottom: 16,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
+    shadowRadius: 6,
+    elevation: 5, // Android
+  },
+  setup: {
+    fontSize: 18,
+    fontWeight: "600",
+    color: "#222",
     marginBottom: 8,
+    textAlign: "center",
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  punchline: {
+    fontSize: 16,
+    color: "#555",
+    textAlign: "center",
+  },
+  buttonRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+    marginTop: 8,
+    marginBottom: 6,
+  },
+  buttonWrap: {
+    flex: 1,
+    marginHorizontal: 6, // usar esto en lugar de gap para compatibilidad
+  },
+  link: {
+    marginTop: 16,
+    color: "blue",
+    fontSize: 16,
   },
 });
