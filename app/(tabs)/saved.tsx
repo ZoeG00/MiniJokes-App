@@ -23,7 +23,11 @@ export default function Saved() {
   };
 
   return (
+    
     <View style={styles.container}>
+      <Link href="/">
+        <Text style={styles.back}>⬅</Text>
+      </Link>
       <Text style={styles.title}>📚 Saved Jokes</Text>
 
       {savedJokes.length === 0 ? (
@@ -52,9 +56,6 @@ export default function Saved() {
         />
       )}
 
-      <Link href="/">
-        <Text style={styles.back}>⬅ Back to Home</Text>
-      </Link>
     </View>
   );
 }
@@ -90,8 +91,8 @@ const styles = StyleSheet.create({
   },
   emoji: {
     position: "absolute",
-    top: 8,
-    right: 8,
+    bottom: -8,
+    left: -2,
     fontSize: 24,
   },
   joke: {
@@ -112,9 +113,8 @@ const styles = StyleSheet.create({
     color: "blue",
   },
   back: {
-    marginTop: 20,
-    fontSize: 16,
-    color: "blue",
+    fontSize: 24,
+    color: "grey",
     textAlign: "center",
   },
 });

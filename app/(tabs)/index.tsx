@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
   },
   link: {
     marginTop: 16,
-    color: "blue",
+    color: "grey",
     fontSize: 16,
   },
 });

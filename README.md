@@ -1,50 +1,48 @@
-# Welcome to your Expo app 👋
+# 🤣 Jokes App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Una aplicación de **React Native con Expo** que muestra chistes aleatorios desde una API, permite **guardarlos**, **evitar duplicados**, **eliminarlos** y **compartirlos**.  
+Incluye un diseño con **tarjetas coloridas** y **persistencia local con AsyncStorage**.
 
-## Get started
+---
 
-1. Install dependencies
+## ✨ Características
 
-   ```bash
-   npm install
-   ```
+- 🔀 Obtener chistes aleatorios desde la API [Official Joke API](https://github.com/15Dkatz/official_joke_api)  
+- 💾 Guardar chistes en memoria persistente (AsyncStorage)  
+- 🚫 Evitar duplicados al guardar  
+- ❌ Eliminar chistes individuales o todos  
+- 📤 Compartir chistes con otras apps (WhatsApp, Instagram, etc.)  
+- 🎨 Estilo con tarjetas coloridas y emojis divertidos  
 
-2. Start the app
+---
 
-   ```bash
-   npx expo start
-   ```
+## 📸 Capturas de pantalla
 
-In the output, you'll find options to open the app in a
+| Home | Saved Jokes |
+|------|-------------|
+| ![Home Screenshot](./assets/screenshots/home.png) | ![Saved Screenshot](./assets/screenshots/saved.png) |
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+---
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## 🛠️ Tecnologías utilizadas
 
-## Get a fresh project
+- [React Native](https://reactnative.dev/)  
+- [Expo](https://expo.dev/)  
+- [AsyncStorage](https://docs.expo.dev/versions/latest/sdk/async-storage/)  
+- [React Context](https://reactjs.org/docs/context.html)  
 
-When you're ready, run:
+---
+
+## 🚀 Instalación y ejecución
+
+Clona el repositorio:
 
 ```bash
-npm run reset-project
-```
+git clone https://github.com/ZoeG00/MiniJokes-App.git
+cd minijokes-app
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+---
+## 👩‍💻 Autor
 
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- Zoe Guzmán
+- |[💼 LinkedIn](https://www.linkedin.com/in/zoeg00) | [🌐 Portafolio](https://zoeguzman-portfolio.vercel.app/)
