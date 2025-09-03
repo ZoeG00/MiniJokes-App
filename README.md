@@ -35,12 +35,11 @@ Incluye un diseño con **tarjetas coloridas** y **persistencia local con AsyncSt
 
 ## 🚀 Instalación y ejecución
 
-Clona el repositorio:
-
 ```bash
-git clone https://github.com/ZoeG00/MiniJokes-App.git
-cd minijokes-app
-
+1. Instalar [Expo Go](https://expo.dev/client) en Android/iOS.
+2. Escanear este QR:
+   ![QR](./assets/screenshots/qr.png)
+```
 ---
 ## 👩‍💻 Autor
 
